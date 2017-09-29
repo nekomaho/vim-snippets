@@ -1,0 +1,74 @@
+snippet     if-string-eq
+abbr        文字列が等しい
+options     word
+        ${1:string} = ${2:string}
+
+snippet     if-string-not-eq
+abbr        文字列が等しくない
+options     word
+        ${1:string} != ${2:string}
+
+snippet     if-string-zero
+abbr        文字長が0ならば
+options     word 
+        -z ${1:string}
+
+snippet     if-string-exists
+abbr        文字長が1以上なら
+options     word
+        -n ${1:string}
+
+snippet     if-dir
+abbr        ディレクトリなら
+options     word
+        -d ${1:file}
+
+snippet     if-file
+abbr        ファイルなら
+options     word
+        -f ${1:file}
+
+snippet     if-file-size-bigger-zero
+abbr        ファイルが0バイトよりも大きいのなら
+options     word
+        -s ${1:file}
+
+snippet     if-file-exists
+abbr        ファイルが存在するのなら
+options     word
+        -e ${1:file}
+
+snippet     if-file-executable
+abbr        ファイルが実行可能なら
+options     word
+        -x ${1:file}
+
+snippet     if-num-ep
+abbr        数字が等しい
+options     word
+        ${1:num} -eq ${2:num2}
+
+snippet     if-num-ne
+abbr        数字が等しくない
+options     word
+        ${1:num} -ne ${2:num2}
+
+snippet     if-num-lt
+abbr        num < num2
+options     word
+        ${1:num} -lt ${2:num2}
+
+snippet     if-num-gt
+abbr        num > num2
+options     word
+        ${1:num} -gt ${2:num2}
+
+snippet     if-num-le
+abbr        num ≦ num2
+options     word
+        ${1:num} -le ${2:num2}
+
+snippet     if-num-ge
+abbr        num ≧ num2
+options     word
+        ${1:num} -ge ${2:num2}

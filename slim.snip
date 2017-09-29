@@ -1,0 +1,89 @@
+snippet     ruby=
+abbr        組み込み表示(エスケープなし)
+options     word
+  = ${1:rubycode}
+
+snippet     ruby==
+abbr        組み込み表示（エスケープあり）
+options     word 
+  == ${1:rubycode}
+
+snippet     div-class
+abbr        <div class="hoge hoge2">
+alias       tag
+options     word
+  .hoge.hoge2
+
+snippet     tag-id
+abbr        <tab id="hoge">
+alias       tag
+options     word 
+  tag#hoge
+
+snippet     tag-id-class
+abbr        <tag id="hoge" class="hoge2 hoge3">
+alias       tag
+options     head
+  tag#hoge.hoge2.hoge3
+
+snippet     base-tmplate
+abbr        ある程度の文法を網羅したれンプレート
+options     head
+  doctype html
+  html
+	head
+	title Slim のファイル例
+		link ref="icon" type="image/png" href=file_path("favicon.png")
+		javascript:
+			alert("javascript!!")
+
+
+	body
+		h1 題名
+
+			/コメントはスラッシュ(一段下げているのはそうしないと同じ階層以下がすべてコメントアウトされるから)
+			組み込みは=か== ==はエスケープしない
+		== yield
+
+			/表示しない組み込みは-
+		- if items.any?
+			table#items
+		- for item in times
+			tr
+			td.name = item.name
+			/! HTMLコメント（HTML上にレンダリングされる
+			td.price = item.price
+				/rubyコードにスペースが入る場合は()で囲む必要がある。
+			td.user=(path_to_user user)
+		- else
+			p アイテム見つからん
+			ねこたん
+		ul
+				 /本当はa要素はインデントされるはずだが、:でインライン化出来る。
+			li: a[href="/b"] Bりんく
+			/id属性は#で代用可能。下のはh2 id="memo"と同義
+		h2#memo
+			/class属性は.で代用可能。下のはdiv class="memo"と同義
+		.memo 
+			/id属性は#で代用可能。下のはh2 id="memo" class="syntax markdown"と同義
+		h2#memo.syntax.markdown
+
+			/ ruby:で以下の階層はrubyのコードを書ける。
+		ruby:
+			def a_unless_current
+				@page_current ? {tag: 'span'} : {tag: 'a', href: 'http://slim-lang.com/'}
+			end
+		 - @page_current = true
+			/ *はアスタリスク属性と言って、rubyのハッシュ値をHTMLに変換してくれる。
+			下記の例だと<span>リンク</span>が設定される。
+		*a_unless_current リンク
+		- @page_current = false
+			/ 下記の例だと<a href="http://slim-lang.com/">リンク</a>が設定される。
+		*a_unless_current リンク
+
+			/テキストコンテンツはdivの入れ子になる
+		div id="footter"
+			== render 'footer'
+				/ | でテキストがエスケープ処理される。
+			| Copyright &copy: #{@year} #{@author}
+
